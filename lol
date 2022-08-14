@@ -126,9 +126,9 @@ while true do
         local getTopDonated = getRemotes.Function("GetOurTopDonated"):InvokeServer()
         if Raised.Value > 999 then
             text = string.format("%.1fk", text / 10^3)
-            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '\n'.. getTopDonated[1].robux.. 'R$' ..'\n'.. 'REACHING GOAL:'.. '\n'.. text.. '</font>')
+            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '-'..getTopDonated[1].robux.. 'R$' ..'\n'.. 'GOAL:'.. '\n'.. text.. '</font>')
         else
-            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '\n'.. getTopDonated[1].robux.. 'R$' .. '\n' ..'REACHING GOAL: '.. '\n' .. Raised.value.. ' / '.. text.. '</font>')
+            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '-'.. getTopDonated[1].robux.. 'R$' .. '\n' ..'GOAL: '.. '\n' .. Raised.value.. ' / '.. text.. '</font>')
         end
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
     end
