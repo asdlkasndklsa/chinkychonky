@@ -73,6 +73,8 @@ local atBooth = false
 game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Connect(function(reached)
 atBooth = true
 end)
+repeat game.Players.LocalPlayer.Character.Humanoid.Jump = true
+until atBooth = true
 while not atBooth do
 wait(.25)
 if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
