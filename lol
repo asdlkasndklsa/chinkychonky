@@ -69,6 +69,10 @@ errCount = errCount + 1
 end
 game:GetService("Workspace").Map.Main.Floor:FindFirstChild("Mesh/Floor"):Destroy()
 game:GetService("Workspace").Map.Main.Floor:FindFirstChild("Mesh/Floor"):Destroy()
+game:GetService("Workspace").Map.Main.Floor.Rocks:Destroy()
+game:GetService("Workspace").Map.Main.Bench:Destroy()
+game:GetService("Workspace").Map.Decoration:Destroy()
+game:GetService("Workspace").Map.Main.Fountain:Destroy()
 game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(booths[tostring(unclaimed[1])]:match("(.+), (.+), (.+)")))
 local atBooth = false
 game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Connect(function(reached)
