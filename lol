@@ -116,7 +116,6 @@ while not atBooth do
     end
 end
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(40,14,101)))
-spawn(function()
 while true do
     counter = 0
     local Players = game:GetService("Players")
@@ -127,9 +126,9 @@ while true do
         local getTopDonated = getRemotes.Function("GetOurTopDonated"):InvokeServer()
         if Raised.Value > 999 then
             text = string.format("%.1fk", text / 10^3)
-            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '\n'.. getTopDonated[1].robux.. 'ROBUX' ..'\n'.. 'REACHING GOAL:'.. '\n'.. text.. '</font>')
+            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '\n'.. getTopDonated[1].robux.. 'R$' ..'\n'.. 'REACHING GOAL:'.. '\n'.. text.. '</font>')
         else
-            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '\n'.. getTopDonated[1].robux.. 'ROBUX' .. '\n' ..'REACHING GOAL: '.. '\n' .. Raised.value.. ' / '.. text.. '</font>')
+            boothText = tostring('<font color="#03fc62">TOP DONATOR:'.. game.Players:GetNameFromUserIdAsync(getTopDonated[1].userId).. '\n'.. getTopDonated[1].robux.. 'R$' .. '\n' ..'REACHING GOAL: '.. '\n' .. Raised.value.. ' / '.. text.. '</font>')
         end
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
     end
