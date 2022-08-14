@@ -83,7 +83,6 @@ for i, v in pairs(gameCursors) do
     local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
     for i2, v2 in pairs(serverList3.data) do
         pcall(function()
-            print(v2.playing)
             if v2.playing < v2.maxPlayers then
                 game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
             end
@@ -165,7 +164,6 @@ for i, v in pairs(gameCursors) do
     local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
     for i2, v2 in pairs(serverList3.data) do
         pcall(function()
-            print(v2.playing)
             if v2.playing < v2.maxPlayers then
                 game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
             end
