@@ -61,7 +61,7 @@ if errCount >= claimCount then
 local gameCursors = {}
 local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
 
-while true do wait(1)
+while true do wait()
     if serverList.nextPageCursor ~= nil then
         table.insert(gameCursors, serverList.nextPageCursor)
         serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
@@ -142,7 +142,7 @@ wait(math.random(1,60))
 local gameCursors = {}
 local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
 
-while true do wait(1)
+while true do wait()
     if serverList.nextPageCursor ~= nil then
         table.insert(gameCursors, serverList.nextPageCursor)
         serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
