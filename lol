@@ -1,3 +1,4 @@
+--pp en caca
 repeat wait() until game:IsLoaded()
 if game.PlaceId ~= 8737602449 then return end
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
