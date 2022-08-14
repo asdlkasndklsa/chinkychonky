@@ -69,11 +69,13 @@ errCount = errCount + 1
 end
 game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(booths[tostring(unclaimed[1])]:match("(.+), (.+), (.+)")))
 local atBooth = false
+spawn(function()
+repeat game.Players.LocalPlayer.Character.Humanoid.Jump = true
+until atBooth
+)
 game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Connect(function(reached)
 atBooth = true
 end)
-repeat game.Players.LocalPlayer.Character.Humanoid.Jump = true
-until atBooth == true
 while not atBooth do
 wait(.25)
 if game.Players.LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Seated then 
