@@ -135,9 +135,9 @@ end
 local RaisedC = Players.LocalPlayer.leaderstats.Raised.value
 while(Players.LocalPlayer.leaderstats.Raised.value == RaisedC)
 do
-wait(30)
+wait(60)
 counter = counter + 1
-if counter >= 60 then
+if counter >= 10 then
 wait(math.random(1,60))
 local gameCursors = {}
 local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
