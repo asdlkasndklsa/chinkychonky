@@ -73,6 +73,7 @@ game:GetService("Workspace").Map.Main.Floor.Rocks:Destroy()
 game:GetService("Workspace").Map.Main.Bench:Destroy()
 game:GetService("Workspace").Map.Decoration:Destroy()
 game:GetService("Workspace").Map.Main.Fountain:Destroy()
+game:GetService("Workspace").Map.Boombox:Destroy()
 game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(booths[tostring(unclaimed[1])]:match("(.+), (.+), (.+)")))
 local atBooth = false
 game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:Connect(function(reached)
@@ -111,10 +112,12 @@ wait(30)
 counter = counter + 1
 if counter >= 60 then
 wait(math.random(1,60))
+while true do wait(10)
 local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
 for i,v in pairs(Servers.data) do
 if v.playing > 19 and v.playing < 27 then
 game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+end
 end
 end
 end
