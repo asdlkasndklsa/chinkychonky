@@ -137,8 +137,6 @@ local localPlayer = game.Players.LocalPlayer
 local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
 
-local oldCFrame = localPlayer.Character.HumanoidRootPart.CFrame
-
 getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
     if p22 == localPlayer.DisplayName then
         task.wait(3)
@@ -164,12 +162,13 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
         end
         
         local backFlipAmount = numberHelpers.formatCommas(p23)
+        local oldCFrame = localPlayer.Character.HumanoidRootPart.CFrame
         backFlipAmount = tonumber(backFlipAmount) * 5
         
         for i = 1, backFlipAmount do
             print(i.. '/'.. backFlipAmount)
             localPlayerBackflip(oldCFrame)
-            wait(.55)
+            task.wait(.55)
         end
         localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
     end
