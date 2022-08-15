@@ -182,9 +182,9 @@ while true do
     function update(text)
         if Raised.Value > 999 then
             text = string.format("%.1fk", text / 10^3)
-            boothText = tostring('1 R$ = 5 BACKFLIPS'.. '\n'.. '<font color="#03fc62">'.. text.. '</font>')
+            boothText = tostring('<font color="#03fc62">1 R$ = 5 BACKFLIPS</font>')
         else
-            boothText = tostring('1 R$ = 1 BACKFLIPS'.. '\n'.. '<font color="#03fc62">'.. Raised.value.. '/'.. text.. '</font>')
+            boothText = tostring('<font color="#03fc62">1 R$ = 5 BACKFLIPS</font>')
         end
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
     end
