@@ -130,6 +130,7 @@ local localPlayer = game.Players.LocalPlayer
 local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 
 getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
+    print(p22)
     if p22 == localPlayer.DisplayName then
         task.wait(0.5)
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer('thank you!', 'All')
@@ -151,9 +152,9 @@ while true do
     function update(text)
         if Raised.Value > 999 then
             text = string.format("%.1fk", text / 10^3)
-            boothText = tostring('1 R$ = 1 PUSHUP'.. '\n'.. '<font color="#03fc62">GOAL: '.. '\n'.. text.. '</font>')
+            boothText = tostring('1 R$ = 1 PUSHUPS'.. '\n'.. '<font color="#03fc62">'.. text.. '</font>')
         else
-            boothText = tostring('1 R$ = 1 PUSHUP'.. '\n'.. '<font color="#03fc62">GOAL: '.. '\n' .. Raised.value.. '/'.. text.. '</font>')
+            boothText = tostring('1 R$ = 1 PUSHUPS'.. '\n'.. '<font color="#03fc62">'.. Raised.value.. '/'.. text.. '</font>')
         end
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
     end
