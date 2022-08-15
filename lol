@@ -174,6 +174,11 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
     end
 end)
 
+local localPlayer = game.Players.LocalPlayer
+local curCamera = game:GetService("Workspace").Camera
+
+curCamera.CFrame = CFrame.lookAt(curCamera.CFrame.Position, curCamera.CFrame.Position + localPlayer.Character.HumanoidRootPart.CFrame.LookVector)
+
 while true do
     counter = 0
     local Players = game:GetService("Players")
