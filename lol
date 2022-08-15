@@ -136,9 +136,9 @@ local boothText
 function update(text)
 if Raised.Value > 999 then
 text = string.format("%.1fk", text / 10^3)
-boothText = tostring('im recording say hi'.. '\n'.. '<font color="#03fc62">REACHING GOAL: '.. '\n'.. text.. '</font>')
+boothText = tostring('im recording say hi'.. '\n'.. '<font color="#03fc62">GOAL: '.. '\n'.. text.. '</font>')
 else
-boothText = tostring('im recording say hi'.. '\n'.. '<font color="#03fc62">REACHING GOAL: '.. '\n' .. Raised.value.. '/'.. text.. '</font>')
+boothText = tostring('im recording say hi'.. '\n'.. '<font color="#03fc62">GOAL: '.. '\n' .. Raised.value.. '/'.. text.. '</font>')
 end
 require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
 end
