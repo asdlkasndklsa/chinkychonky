@@ -112,6 +112,22 @@ game.Players.LocalPlayer.Character.Humanoid.Jump = true
 end
 end
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(40,14,101)))
+local localPlayer = game.Players.LocalPlayer
+local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
+
+getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
+    print(p22)
+    if p22 == localPlayer.DisplayName then
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer('thank you!', 'All')
+        local loopJump
+        loopJump = game.RunService.RenderStepped:Connect(function()
+            localPlayer.Character.Humanoid.Jump = true
+        end)
+        
+        task.wait(2.55)
+        loopJump:Disconnect()
+    end
+end)
 while true do
 counter = 0
 local Players = game:GetService("Players")
