@@ -130,7 +130,6 @@ local localPlayer = game.Players.LocalPlayer
 local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 
 getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
-    print(p22)
     if p22 == localPlayer.DisplayName then
         task.wait(0.5)
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer('thank you!', 'All')
