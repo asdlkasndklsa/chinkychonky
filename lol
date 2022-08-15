@@ -129,18 +129,48 @@ game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game.Players.
 local localPlayer = game.Players.LocalPlayer
 local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 
+local localPlayer = game.Players.LocalPlayer
+local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
+local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
+
+local localPlayer = game.Players.LocalPlayer
+local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
+local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
+
 getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
-    print(p22)
     if p22 == localPlayer.DisplayName then
-        task.wait(0.5)
+        task.wait(3)
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer('thank you!', 'All')
-        local loopJump
-        loopJump = game.RunService.RenderStepped:Connect(function()
-            localPlayer.Character.Humanoid.Jump = true
-        end)
+        task.wait(2)
+        local localPlayer = game.Players.LocalPlayer
+        local h = 0.0174533
         
-        task.wait(2.55)
-        loopJump:Disconnect()
+        function localPlayerBackflip(oldCFrame)
+            localPlayer.Character.Humanoid:ChangeState("Jumping")
+            wait()
+            localPlayer.Character.Humanoid.Sit = true
+            for i = 1,360 do
+                delay(i/720,function()
+                    localPlayer.Character.Humanoid.Sit = true
+                    localPlayer.Character.HumanoidRootPart.CFrame = localPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(h,0,0)
+                end)
+            end
+            wait(0.55)
+            localPlayer.Character.Humanoid.Sit = false
+            localPlayer.Character.Humanoid:ChangeState("GettingUp")
+            localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
+        end
+        
+        local backFlipAmount = numberHelpers.formatCommas(p23)
+        local oldCFrame = localPlayer.Character.HumanoidRootPart.CFrame
+        backFlipAmount = tonumber(backFlipAmount) * 5
+        
+        for i = 1, backFlipAmount do
+            print(i.. '/'.. backFlipAmount)
+            localPlayerBackflip(oldCFrame)
+            wait(.55)
+        end
+        localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
     end
 end)
 
@@ -152,9 +182,9 @@ while true do
     function update(text)
         if Raised.Value > 999 then
             text = string.format("%.1fk", text / 10^3)
-            boothText = tostring('1 R$ = 1 PUSHUPS'.. '\n'.. '<font color="#03fc62">'.. text.. '</font>')
+            boothText = tostring('1 R$ = 5 BACKFLIPS'.. '\n'.. '<font color="#03fc62">'.. text.. '</font>')
         else
-            boothText = tostring('1 R$ = 1 PUSHUPS'.. '\n'.. '<font color="#03fc62">'.. Raised.value.. '/'.. text.. '</font>')
+            boothText = tostring('1 R$ = 1 BACKFLIPS'.. '\n'.. '<font color="#03fc62">'.. Raised.value.. '/'.. text.. '</font>')
         end
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
     end
