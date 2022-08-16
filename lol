@@ -192,7 +192,7 @@ while true do
             boothText = tostring('<font color="#03fc62">1 R$ = 5 BACKFLIPS</font>')
         end
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer('asdasdasdasd', "booth")
-        task.wait(1)
+        task.wait(3)
         require(game.ReplicatedStorage.Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
     end
 
