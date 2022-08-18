@@ -127,12 +127,13 @@ if getgenv().stareAtPlayers then
 end
 
 _G.currentTime = 0
+getgenv().noDonoTime = getgenv().noDonoTime * 60
 
 spawn(function()
     while true do
         wait(1)
         _G.currentTime = _G.currentTime + 1
-        if _G.currentTime >= getgenv().noDonoTime * 60 then
+        if _G.currentTime >= getgenv().noDonoTime then
             serverHop()
         end
     end
