@@ -8,7 +8,12 @@ else
 end
 
 if string.find(identifyexecutor(), "Synapse X") then
-    syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/sss'))()")
+    syn.queue_on_teleport([[
+        getgenv().noDonoTime = ]].. getgenv().noDonoTime..
+        [[getgenv().stareAtPlayers = ]].. getgenv().stareAtPlayers..
+        [[getgenv().boothText = ]].. getgenv().boothText..
+        [[loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/sss'))()
+    ]])
 else
     print('Please put in autoexecute.')
 end
