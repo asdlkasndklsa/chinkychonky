@@ -10,9 +10,9 @@ end
 
 if string.find(identifyexecutor(), "Synapse X") then
     syn.queue_on_teleport([[
-        getgenv().noDonoTime = ]].. tostring(getgenv().noDonoTime)..
-        [[getgenv().stareAtPlayers = ]].. tostring(getgenv().stareAtPlayers)..
-        [[getgenv().boothText = ]].. getgenv().boothText..
+        getgenv().noDonoTime = ]].. tostring(getgenv().noDonoTime)..'\n'..
+        [[getgenv().stareAtPlayers = ]].. tostring(getgenv().stareAtPlayers)..'\n'..
+        [[getgenv().boothText = ]].. getgenv().boothText..'\n'..
         [[loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/sss'))()
     ]])
 else
