@@ -10,7 +10,7 @@ end
 if string.find(identifyexecutor(), "Synapse X") then
     syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/sss'))()")
 else
-    print('Put in autoexecute to work')    
+    print('Please put in autoexecute.')
 end
 
 local tweenService = game:GetService('TweenService')
@@ -129,7 +129,7 @@ spawn(function()
     while true do
         wait(1)
         _G.currentTime = _G.currentTime + 1
-        if currentTime >= getgenv().noDonoTime * 60 then
+        if _G.currentTime >= getgenv().noDonoTime * 60 then
             serverHop()
         end
     end
