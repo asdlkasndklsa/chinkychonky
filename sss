@@ -1,0 +1,172 @@
+repeat wait()
+until game:IsLoaded()
+
+if not _G.alreadyExecuted then
+    _G.alreadyExecuted = true
+else
+    return
+end
+
+if string.find(identifyexecutor(), "Synapse X") then
+    syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/sss'))()")
+else
+
+local tweenService = game:GetService('TweenService')
+local localPlayer = game.Players.LocalPlayer
+
+local getRemotes = require(game:GetService("ReplicatedStorage").Remotes);
+local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
+
+local localBooth
+local boothNumber
+
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+
+for i, v in pairs(game.Players.LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
+    if v.Details.Owner.Text == 'unclaimed' then
+        localBooth = v.Details.Adornee.Parent.ItemsPart
+        boothNumber = string.gsub(v.Name, 'BoothUI', '')
+        break
+    end
+end
+
+local function updateBooth()
+    getRemotes.Event("SetBoothText"):FireServer('asdasdasd', 'booth')
+    wait(3)
+    getRemotes.Event("SetBoothText"):FireServer(getgenv().boothText, 'booth')
+end
+
+local function serverHop()
+    local gameCursors = {}
+    local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+    
+    while true do wait()
+        if serverList.nextPageCursor ~= nil then
+            table.insert(gameCursors, serverList.nextPageCursor)
+            serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
+        else
+            break
+        end
+    end
+    
+    local serverList2 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+    for i, v in pairs(serverList2.data) do
+        pcall(function()
+            if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
+                game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+            end
+        end)
+    end
+    
+    for i, v in pairs(gameCursors) do
+        local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
+        for i2, v2 in pairs(serverList3.data) do
+            pcall(function()
+                print(v2.playing)
+                if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
+                    game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
+                end
+            end)
+        end
+        wait(1)
+    end
+end
+
+pcall(function()
+    getRemotes.Function("ClaimBooth"):InvokeServer(tonumber(boothNumber))
+end)
+
+updateBooth()
+
+local newTween = tweenService:Create(localPlayer.Character.HumanoidRootPart, TweenInfo.new(1), {CFrame = localBooth.CFrame * CFrame.Angles(0, 0, 0) * CFrame.new(6, 0, -5)})
+local newLoop
+
+newLoop = game.RunService.RenderStepped:Connect(function()
+    for i, v in pairs(localPlayer.Character:GetDescendants()) do
+        if v:IsA('BasePart') then
+            v.Velocity = Vector3.new(0, 0, 0)
+        end
+    end
+    if localPlayer.Character.Humanoid.Sit then
+        localPlayer.Character.Humanoid.Jump = true
+    end
+end)
+
+game:GetService("Workspace").Map.Main.Floor:FindFirstChild("Mesh/Floor"):Destroy()
+
+newTween:Play()
+newTween.Completed:Wait()
+newLoop:Disconnect()
+
+if getgenv().stareAtPlayers then
+    newLoop = game.RunService.RenderStepped:Connect(function()
+        local closestDistance = math.huge
+        local closestPlayer
+        
+        for i, v in pairs(game.Players:GetPlayers()) do
+            if v ~= game.Players.LocalPlayer then
+                pcall(function()
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude < closestDistance then
+                        closestPlayer = v
+                        closestDistance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
+                    end
+                end)
+            end
+        end
+        pcall(function()
+            workspace.Camera.CFrame = CFrame.new(workspace.Camera.CFrame.Position, closestPlayer.Character.Head.Position)
+        end)
+    end)
+end
+
+_G.currentTime = 0
+
+spawn(function()
+    while true do
+        wait(1)
+        _G.currentTime = _G.currentTime + 1
+        if currentTime >= getgenv().noDonoTime * 60 then
+            serverHop()
+        end
+    end
+end)
+
+local oldCFrame = localPlayer.Character.HumanoidRootPart.CFrame
+
+getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
+    if p22 == localPlayer.DisplayName then
+        task.wait(3)
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer('thank you!', 'All')
+        task.wait(1)
+        local h = 0.0174533
+        
+        function localPlayerBackflip(oldCFrame)
+            localPlayer.Character.HumanoidRootPart:ChangeState('Jumping')
+            localPlayer.Character.Humanoid.Sit = true
+            for i = 1, 360 do
+                delay(i/720, function()
+                    localPlayer.Character.Humanoid.Sit = true
+                    localPlayer.Character.HumanoidRootPart.CFrame = localPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(h,0,0)
+                end)
+            end
+            wait(.55)
+            localPlayer.Character.Humanoid.Sit = false
+            localPlayer.Character.Humanoid:ChangeState("GettingUp")
+            localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
+        end
+        
+        local backFlipAmount = numberHelpers.formatCommas(p23)
+        backFlipAmount = tonumber(backFlipAmount) * 5
+        
+        _G.currentTime = 0
+        
+        for i = 1, backFlipAmount do
+            print(i.. '/'.. backFlipAmount)
+            localPlayerBackflip(oldCFrame)
+            task.wait(.55)
+        end
+        localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
+    end
+end)
