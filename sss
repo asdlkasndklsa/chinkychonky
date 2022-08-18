@@ -26,7 +26,10 @@ for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) d
     v:Disable()
 end
 
-for i, v in pairs(game.Players.LocalPlayer.PlayerGui:WaitForChild('MapUIContainer'):WaitForChild('MapUI'):WaitForChild('BoothUI'):GetChildren()) do
+repeat wait()
+until game.Players.LocalPlayer.PlayerGui:FindFirstChild('MapUIContainer')
+
+for i, v in pairs(game.Players.LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
     if v.Details.Owner.Text == 'unclaimed' then
         localBooth = v.Details.Adornee.Parent.ItemsPart
         boothNumber = string.gsub(v.Name, 'BoothUI', '')
