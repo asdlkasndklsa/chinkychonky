@@ -153,7 +153,7 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
         local h = 0.0174533
         
         function localPlayerBackflip(oldCFrame)
-            localPlayer.Character.HumanoidRootPart:ChangeState('Jumping')
+            localPlayer.Character.Humanoid:ChangeState('Jumping')
             localPlayer.Character.Humanoid.Sit = true
             for i = 1, 360 do
                 delay(i/720, function()
