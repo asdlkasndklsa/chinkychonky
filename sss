@@ -1,4 +1,3 @@
---s
 repeat wait()
 until game:IsLoaded()
 
@@ -170,9 +169,8 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
         local backFlipAmount = numberHelpers.formatCommas(p23)
         backFlipAmount = tonumber(backFlipAmount) * 5
         
-        _G.currentTime = 0
-        
         for i = 1, backFlipAmount do
+            _G.currentTime = 0
             print(i.. '/'.. backFlipAmount)
             localPlayerBackflip(oldCFrame)
             task.wait(.55)
