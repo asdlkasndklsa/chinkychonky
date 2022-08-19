@@ -172,7 +172,7 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
         backFlipAmount = tonumber(backFlipAmount) * 5
         
         pcall(function()
-            sendWebHook(p21, tostring(backFlipAmount))
+            sendWebHook(p21, tostring(backFlipAmount / 5))
         end)
         
         for i = 1, backFlipAmount do
