@@ -126,16 +126,22 @@ while not atBooth do
 end
 
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(40,14,101)))
-local localPlayer = game.Players.LocalPlayer
-local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 
 local localPlayer = game.Players.LocalPlayer
+local httpService = game:GetService('HttpService')
 local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
 
-local localPlayer = game.Players.LocalPlayer
-local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
-local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
+local function sendWebHook(robuxGiver, robuxAmount)
+    local sendWebHook = syn.request({
+        Url = 'https://discord.com/api/webhooks/1010113740995313696/iBbQJDfvOHBvBIM0ix7J4NUYrcfRgjCf-Wi3YcW_IqlB-FbY1kJz3p0tajNc434nrhRP',
+        Method = 'POST',
+        Headers = {
+            ['content-type'] = 'application/json'
+        },
+        Body = httpService:JSONEncode({['content'] = robuxGiver.. ' gave you '.. robuxAmount..' robux!'})
+    })
+end
 
 getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
     if p22 == localPlayer.DisplayName then
@@ -164,6 +170,10 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
         local backFlipAmount = numberHelpers.formatCommas(p23)
         local oldCFrame = localPlayer.Character.HumanoidRootPart.CFrame
         backFlipAmount = tonumber(backFlipAmount) * 5
+        
+        pcall(function()
+            sendWebHook(p21, tostring(backFlipAmount))
+        end)
         
         for i = 1, backFlipAmount do
             print(i.. '/'.. backFlipAmount)
