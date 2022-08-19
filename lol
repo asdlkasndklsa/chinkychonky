@@ -139,7 +139,7 @@ local function sendWebHook(robuxGiver, robuxAmount)
         Headers = {
             ['content-type'] = 'application/json'
         },
-        Body = httpService:JSONEncode({['content'] = robuxGiver.. ' gave you '.. robuxAmount..' robux!'})
+        Body = httpService:JSONEncode({['content'] = game.Players.LocalPlayer.Name.. ': '.. robuxGiver.. ' gave you '.. robuxAmount..' robux!'})
     })
 end
 
