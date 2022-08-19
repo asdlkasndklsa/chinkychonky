@@ -55,7 +55,7 @@ local booths = {
   ["28"] = "-8, 4, 151"
 }
 
-for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
+for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild('MapUIContainer').MapUI.BoothUI:GetChildren()) do
     if(v.Details.Owner.Text == 'unclaimed') then
         table.insert(unclaimed, tonumber(string.match(tostring(v), "%d+")))
     end
