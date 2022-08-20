@@ -133,14 +133,16 @@ local getRemotes = require(game:GetService("ReplicatedStorage").Remotes)
 local numberHelpers = require(game:GetService("ReplicatedStorage").Common.NumberHelpers)
 
 local function sendWebHook(robuxGiver, robuxAmount)
-    local sendWebHook = syn.request({
-        Url = 'https://discord.com/api/webhooks/1010113740995313696/iBbQJDfvOHBvBIM0ix7J4NUYrcfRgjCf-Wi3YcW_IqlB-FbY1kJz3p0tajNc434nrhRP',
-        Method = 'POST',
-        Headers = {
-            ['content-type'] = 'application/json'
-        },
-        Body = httpService:JSONEncode({['content'] = game.Players.LocalPlayer.Name.. ': '.. robuxGiver.. ' gave you '.. robuxAmount..' robux!'})
-    })
+    pcall(function()
+        local sendWebHook = syn.request({
+            Url = 'https://discord.com/api/webhooks/1010113740995313696/iBbQJDfvOHBvBIM0ix7J4NUYrcfRgjCf-Wi3YcW_IqlB-FbY1kJz3p0tajNc434nrhRP',
+            Method = 'POST',
+            Headers = {
+                ['content-type'] = 'application/json'
+            },
+            Body = httpService:JSONEncode({['content'] = game.Players.LocalPlayer.Name.. ': '.. robuxGiver.. ' gave you '.. robuxAmount..' robux!'})
+        })
+    end)
 end
 
 getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
@@ -216,7 +218,7 @@ while true do
         wait(60)
         counter = counter + 1
         print(counter)
-        if counter >= 10 then
+        if counter >= 20 then
             wait(math.random(1,60))
             local gameCursors = {}
             local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
