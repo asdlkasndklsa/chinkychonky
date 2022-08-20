@@ -68,31 +68,40 @@ end
 while not pcall(boothclaim) do
     if errCount >= claimCount then
         local gameCursors = {}
-        local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
-    
+        pcall(function()
+            local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+        end)
+        
         while true do wait()
             if serverList.nextPageCursor ~= nil then
                 table.insert(gameCursors, serverList.nextPageCursor)
-                serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
+                pcall(function()
+                    serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
+                end)
             else
                 break
             end
         end
         
-        local serverList2 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+        pcall(function()
+            local serverList2 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+        end)
         for i, v in pairs(serverList2.data) do
             pcall(function()
-                if v2.playing < v2.maxPlayers then
+                if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
                     game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
                 end
             end)
         end
         
         for i, v in pairs(gameCursors) do
-            local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
+            pcall(function()
+                local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
+            end)
             for i2, v2 in pairs(serverList3.data) do
                 pcall(function()
-                    if v2.playing < v2.maxPlayers then
+                    print(v2.playing)
+                    if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
                         game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
                     end
                 end)
@@ -219,31 +228,40 @@ while true do
         if counter >= 10 then
             wait(math.random(1,60))
             local gameCursors = {}
-            local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
-    
+            pcall(function()
+                local serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+            end)
+            
             while true do wait()
                 if serverList.nextPageCursor ~= nil then
                     table.insert(gameCursors, serverList.nextPageCursor)
-                    serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
+                    pcall(function()
+                        serverList = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. serverList.nextPageCursor))
+                    end)
                 else
                     break
                 end
             end
             
-            local serverList2 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+            pcall(function()
+                local serverList2 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100"))
+            end)
             for i, v in pairs(serverList2.data) do
                 pcall(function()
-                    if v2.playing < v2.maxPlayers then
+                    if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
                         game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
                     end
                 end)
             end
             
             for i, v in pairs(gameCursors) do
-                local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
+                pcall(function()
+                    local serverList3 = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/8737602449/servers/Public?sortOrder=Desc&limit=100&cursor=".. v))
+                end)
                 for i2, v2 in pairs(serverList3.data) do
                     pcall(function()
-                        if v2.playing < v2.maxPlayers then
+                        print(v2.playing)
+                        if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
                             game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
                         end
                     end)
