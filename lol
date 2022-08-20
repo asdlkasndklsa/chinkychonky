@@ -100,7 +100,6 @@ while not pcall(boothclaim) do
             end)
             for i2, v2 in pairs(serverList3.data) do
                 pcall(function()
-                    print(v2.playing)
                     if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
                         game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
                     end
@@ -260,7 +259,6 @@ while true do
                 end)
                 for i2, v2 in pairs(serverList3.data) do
                     pcall(function()
-                        print(v2.playing)
                         if v2.playing < v2.maxPlayers and v2.id ~= game.JobId then
                             game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v2.id)
                         end
