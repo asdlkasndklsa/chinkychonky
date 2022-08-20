@@ -224,7 +224,7 @@ while true do
         wait(60)
         counter = counter + 1
         print(counter)
-        if counter >= 10 then
+        if counter >= 20 then
             wait(math.random(1,60))
             local gameCursors = {}
             pcall(function()
