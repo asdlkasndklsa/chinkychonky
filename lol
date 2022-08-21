@@ -135,7 +135,7 @@ local numberHelpers = require(game:GetService("ReplicatedStorage").Common.Number
 local function sendWebHook(robuxGiver, robuxAmount)
     pcall(function()
         local sendWebHook = syn.request({
-            Url = 'https://discord.com/api/webhooks/1010113740995313696/iBbQJDfvOHBvBIM0ix7J4NUYrcfRgjCf-Wi3YcW_IqlB-FbY1kJz3p0tajNc434nrhRP',
+            Url = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_',
             Method = 'POST',
             Headers = {
                 ['content-type'] = 'application/json'
