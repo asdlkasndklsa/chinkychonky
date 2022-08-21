@@ -230,8 +230,8 @@ game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClie
                 task.wait(60)
                 coolDown = false
             end
+            break
         end
-        break
     end
 end)
 
