@@ -186,6 +186,53 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
     end
 end)
 
+local function getPlayer(partName)
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if v.Name:lower():sub(1,#partName) == partName:lower() or v.DisplayName:lower():sub(1, #partName) == partName:lower() then
+            return v
+        end
+    end
+end
+
+local coolDown = false
+local keyWords = {
+    'afk',
+    'jump',
+    'hi',
+    'hello',
+    'whats up',
+    'hey',
+    'come'
+}
+
+local function randomResponse()
+    local returnResponse
+    local responseTable = {
+        'hello',
+        'hi',
+        'whats up',
+        'hey'
+    }
+    returnResponse = responseTable[math.random(1, #responseTable)]
+    return returnResponse
+end
+
+game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+    local messageSplit = string.split(messageData.Message, ' ')
+    for i, v in pairs(messageSplit) do
+        if table.find(keyWords, v:lower()) then
+            if (localPlayer.Character.HumanoidRootPart.Position - game.Players[messageData.FromSpeaker].Character.HumanoidRootPart.Position).magnitude <= 10 and not coolDown then
+                localPlayer.Character.Humanoid.Jump = true
+                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(randomResponse(), 'All')
+                coolDown = true
+                task.wait(60)
+                coolDown = false
+            end
+        end
+        break
+    end
+end)
+
 local localPlayer = game.Players.LocalPlayer
 local curCamera = game:GetService("Workspace").Camera
 
