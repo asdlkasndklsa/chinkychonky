@@ -203,7 +203,8 @@ local keyWords = {
     'whats up',
     'hey',
     'come',
-    'donate'
+    'donate',
+    'dono'
 }
 
 local function randomResponse()
