@@ -57,7 +57,7 @@ for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) d
 end
 
 if string.find(identifyexecutor(), "Synapse X") then
-    syn.queue_on_teleport("getgenv().webHook = "..tostring(getgenv().webHook) .."\ngetgenv().webHookLink = "..tostring(getgenv().webHookLink) .."\ngetgenv().noDonoTime = "..tostring(getgenv().noDonoTime) .."\ngetgenv().boothText = "..'"'..tostring(getgenv().boothText)..'"' .."\ngetgenv().autoMessage = "..tostring(getgenv().autoMessage) .."\ngetgenv().messageText = "..'"'..tostring(getgenv().messageText)..'"' .."\ngetgenv().autoMessageCD = "..tostring(getgenv().autoMessageCD) .."\ngetgenv().autoReply = "..tostring(getgenv().autoReply) .."\ngetgenv().jumpWhenReply = "..tostring(getgenv().jumpWhenReply) .."\nloadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/aaa'))()")
+    syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/aaa'))()")
 end
 
 for i, v in pairs(localPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
