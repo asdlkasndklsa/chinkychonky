@@ -23,7 +23,7 @@ for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) d
 end
 
 if string.find(identifyexecutor(), "Synapse X") then
-    syn.queue_on_teleport("getgenv().webHook = "..tostring(getgenv().webHook) ..";getgenv().webHookLink = "..tostring(getgenv().webHookLink) ..";getgenv().noDonoTime = "..tostring(getgenv().noDonoTime) ..";getgenv().boothText = "..tostring(getgenv().boothText) ..";getgenv().autoMessage = "..tostring(getgenv().autoMessage) ..";getgenv().messageText = "..tostring(getgenv().messageText) ..";getgenv().autoMessageCD = "..tostring(getgenv().autoMessageCD) ..";getgenv().autoReply = "..tostring(getgenv().autoReply) ..";getgenv().jumpWhenReply = "..tostring(getgenv().jumpWhenReply) ..";loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/aaa'))()")
+    syn.queue_on_teleport("getgenv().webHook = "..tostring(getgenv().webHook) .."\ngetgenv().webHookLink = "..tostring(getgenv().webHookLink) .."\ngetgenv().noDonoTime = "..tostring(getgenv().noDonoTime) .."\ngetgenv().boothText = "..tostring(getgenv().boothText) .."\ngetgenv().autoMessage = "..tostring(getgenv().autoMessage) .."\ngetgenv().messageText = "..tostring(getgenv().messageText) .."\ngetgenv().autoMessageCD = "..tostring(getgenv().autoMessageCD) .."\ngetgenv().autoReply = "..tostring(getgenv().autoReply) .."\ngetgenv().jumpWhenReply = "..tostring(getgenv().jumpWhenReply) .."\nloadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/aaa'))()")
 end
 
 for i, v in pairs(localPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
@@ -153,7 +153,7 @@ end
 local function sendWebHook(robuxGiver, robuxAmount)
     pcall(function()
         local sendWebHook = syn.request({
-            Url = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_',
+            Url = getgenv().webHookLink,
             Method = 'POST',
             Headers = {
                 ['content-type'] = 'application/json'
