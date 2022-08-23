@@ -156,10 +156,7 @@ if getgenv().autoReply then
         for i, v in pairs(messageSplit) do
             if table.find(getgenv().keyWords, v:lower()) then
                 if (localPlayer.Character.HumanoidRootPart.Position - game.Players[messageData.FromSpeaker].Character.HumanoidRootPart.Position).magnitude <= 10 and not coolDown then
-                    task.wait(2)
-                    if getgenv().jumpWhenReply then
-                        localPlayer.Character.Humanoid.Jump = true
-                    end
+                    localPlayer.Character.Humanoid.Jump = true
                     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(randomResponse(), 'All')
                     coolDown = true
                     task.wait(60)
