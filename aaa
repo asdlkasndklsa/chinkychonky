@@ -1,0 +1,185 @@
+repeat wait()
+until game:IsLoaded()
+
+local newLoop
+local coolDown
+local newTween
+local boothPart
+local boothNumber
+local currentTime
+local unclaimedBooth
+local localPlayer = game.Players.LocalPlayer
+local replicatedStorage = game.ReplicatedStorage
+local httpService = game:GetService('HttpService')
+local tweenService = game:GetService('TweenService')
+local getRemotes = require(replicatedStorage.Remotes)
+local numberHelpers = require(replicatedStorage.Common.NumberHelpers)
+
+repeat wait()
+until localPlayer.PlayerGui:FindFirstChild('BoothUI28', true)
+
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+
+if string.find(identifyexecutor(), "Synapse X") then
+    syn.queue_on_teleport("getgenv().webHook = "..tostring(getgenv().webHook) ..";getgenv().webHookLink = "..tostring(getgenv().webHookLink) ..";getgenv().noDonoTime = "..tostring(getgenv().noDonoTime) ..";getgenv().boothText = "..tostring(getgenv().boothText) ..";getgenv().autoMessage = "..tostring(getgenv().autoMessage) ..";getgenv().messageText = "..tostring(getgenv().messageText) ..";getgenv().autoMessageCD = "..tostring(getgenv().autoMessageCD) ..";getgenv().autoReply = "..tostring(getgenv().autoReply) ..";getgenv().jumpWhenReply = "..tostring(getgenv().jumpWhenReply) ..";loadstring(game:HttpGet('https://raw.githubusercontent.com/asdlkasndklsa/chinkychonky/main/aaa'))()")
+end
+
+for i, v in pairs(localPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
+    if v.Details.Owner.Text == 'unclaimed' then
+        unclaimedBooth = v
+        break
+    end
+end
+
+boothNumber = string.gsub(unclaimedBooth.Name, 'BoothUI', '')
+boothNumber = tonumber(boothNumber)
+boothPart = unclaimedBooth.Details.Adornee.Parent.ItemsPart
+
+pcall(function()
+    getRemotes.Function("ClaimBooth"):InvokeServer(tonumber(boothNumber))
+end)
+
+newTween = tweenService:Create(localPlayer.Character.HumanoidRootPart, TweenInfo.new(1, Enum.EasingStyle.Linear), {CFrame = boothPart.CFrame * CFrame.Angles(0, 0, 0) * CFrame.new(6, 0, -9)})
+newLoop = game.RunService.RenderStepped:Connect(function()
+    for i, v in pairs(localPlayer.Character:GetDescendants()) do
+        if v:IsA('BasePart') then
+            v.Velocity = Vector3.new(0, 0, 0)
+        end
+    end
+    localPlayer.Character.Humanoid.Jump = true
+end)
+
+newTween:Play()
+newTween.Completed:Wait()
+newLoop:Disconnect()
+
+local function serverHop()
+    local checkStatus, serverList = pcall(httpService.JSONDecode, httpService, game:HttpGet('https://games.roblox.com/v1/games/'..game.PlaceId..'/servers/Public?sortOrder=Desc&excludeFullGames=true&limit=100'))
+    if checkStatus then
+        for i, v in pairs(serverList['data']) do
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v['id'])
+            wait(5)
+        end
+    else
+        while true do
+            local cS, sL = pcall(httpService.JSONDecode, httpService, game:HttpGet('https://games.roblox.com/v1/games/'..game.PlaceId..'/servers/Public?sortOrder=Desc&excludeFullGames=true&limit=100'))
+            if cS then
+                for i, v in pairs(serverList['data']) do
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v['id'])
+                    wait(5)
+                end
+                break
+            end
+            wait(5)
+        end
+    end
+end
+
+local function updateBooth()
+    getRemotes.Event("SetBoothText"):FireServer('asdasdasd', 'booth')
+    wait(3)
+    getRemotes.Event("SetBoothText"):FireServer(getgenv().boothText, 'booth')
+end
+
+currentTime = 0
+spawn(function()
+    while true do
+        currentTime = currentTime + 1
+        if currentTime >= (getgenv().noDonoTime * 60) then
+            serverHop()
+        end
+        wait(1)
+    end
+end)
+
+if getgenv().autoMessage then
+    spawn(function()
+        while true do
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(getgenv().messageText, 'All')
+            wait(getgenv().autoMessageCD * 60)
+        end
+    end)
+end
+
+local function randomResponse()
+    local returnResponse
+    returnResponse = getgenv().responseTable[math.random(1, #getgenv().responseTable)]
+    return returnResponse
+end
+
+coolDown = false
+
+if getgenv().autoReply then
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+        local messageSplit = string.split(messageData.Message, ' ')
+        for i, v in pairs(messageSplit) do
+            if table.find(getgenv().keyWords, v:lower()) then
+                if (localPlayer.Character.HumanoidRootPart.Position - game.Players[messageData.FromSpeaker].Character.HumanoidRootPart.Position).magnitude <= 10 and not coolDown then
+                    if getgenv().jumpWhenReply then
+                        localPlayer.Character.Humanoid.Jump = true
+                    end
+                    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(randomResponse(), 'All')
+                    coolDown = true
+                    task.wait(60)
+                    coolDown = false
+                end
+                break
+            end
+        end
+    end)
+end
+
+local function localPlayerBackflip(oldCFrame)
+    localPlayer.Character.Humanoid:ChangeState("Jumping")
+    wait()
+    localPlayer.Character.Humanoid.Sit = true
+    for i = 1,360 do
+        delay(i/720,function()
+            localPlayer.Character.Humanoid.Sit = true
+            localPlayer.Character.HumanoidRootPart.CFrame = localPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0.0174533,0,0)
+        end)
+    end
+    wait(0.55)
+    localPlayer.Character.Humanoid.Sit = false
+    localPlayer.Character.Humanoid:ChangeState("GettingUp")
+    localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
+end
+
+local function sendWebHook(robuxGiver, robuxAmount)
+    pcall(function()
+        local sendWebHook = syn.request({
+            Url = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_',
+            Method = 'POST',
+            Headers = {
+                ['content-type'] = 'application/json'
+            },
+            Body = httpService:JSONEncode({['content'] = game.Players.LocalPlayer.Name.. ': '.. robuxGiver.. ' gave you '.. robuxAmount..' robux!'})
+        })
+    end)
+end
+
+getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p24)
+    if p22 == localPlayer.DisplayName then
+        task.wait(3)
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer('thank you!', 'All')
+        task.wait(2)
+        local backFlipAmount = numberHelpers.formatCommas(p23)
+        local oldCFrame = localPlayer.Character.HumanoidRootPart.CFrame
+        backFlipAmount = tonumber(backFlipAmount) * 5
+        
+        if getgenv().webHook then
+            pcall(function()
+                sendWebHook(p21, tostring(backFlipAmount / 5))
+            end)
+        end
+        
+        for i = 1, backFlipAmount do
+            print(i.. '/'.. backFlipAmount)
+            localPlayerBackflip(oldCFrame)
+            task.wait(.55)
+        end
+        localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
+    end
+end)
