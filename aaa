@@ -2,7 +2,7 @@
 getgenv().webHook = true
 getgenv().webHookLink = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_'
 getgenv().noDonoTime = 20
-getgenv().boothText = '<font color="#03fc62">1 R$ = 5 BACKFLIPS INGAME</font>'
+getgenv().boothText = '<font color="#03fc62">1 R$ = 5 BACKFLIPS</font>'
 getgenv().autoMessage = false
 getgenv().messageText = "donate if you're cool"
 getgenv().autoMessageCD = 3
