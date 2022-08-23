@@ -1,3 +1,37 @@
+-- Please put numbers as minutes ex. 5 is equal to 5 minutes
+getgenv().webHook = true
+getgenv().webHookLink = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_'
+getgenv().noDonoTime = 10
+getgenv().boothText = '<font color="#03fc62">1 R$ = 5 BACKFLIPS</font>'
+getgenv().autoMessage = true
+getgenv().messageText = "donate if you're cool"
+getgenv().autoMessageCD = 3
+getgenv().autoReply = true
+getgenv().jumpWhenReply = true
+
+getgenv().keyWords = {
+    'afk',
+    'jump',
+    'hi',
+    'hello',
+    'whats up',
+    'hey',
+    'come',
+    'donate',
+    'dono',
+    'yo',
+    'wassup',
+    'robux',
+    'bro'
+}
+getgenv().responseTable = {
+    'hello',
+    'hi',
+    'whats up',
+    'hey',
+    'yo'
+}
+
 repeat wait()
 until game:IsLoaded()
 
