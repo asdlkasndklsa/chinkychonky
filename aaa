@@ -117,6 +117,8 @@ local function updateBooth()
     getRemotes.Event("SetBoothText"):FireServer(getgenv().boothText, 'booth')
 end
 
+updateBooth()
+
 currentTime = 0
 spawn(function()
     while true do
