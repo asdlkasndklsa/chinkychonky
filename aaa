@@ -89,6 +89,10 @@ newTween:Play()
 newTween.Completed:Wait()
 newLoop:Disconnect()
 
+local curCamera = game:GetService("Workspace").Camera
+
+curCamera.CFrame = CFrame.lookAt(curCamera.CFrame.Position, curCamera.CFrame.Position + localPlayer.Character.HumanoidRootPart.CFrame.LookVector)
+
 local function serverHop()
     local checkStatus, serverList = pcall(httpService.JSONDecode, httpService, game:HttpGet('https://games.roblox.com/v1/games/'..game.PlaceId..'/servers/Public?sortOrder=Desc&excludeFullGames=true&limit=100'))
     if checkStatus then
