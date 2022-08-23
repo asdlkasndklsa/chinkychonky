@@ -113,6 +113,9 @@ coolDown = false
 
 if getgenv().autoReply then
     game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+        if messageData.FromSpeaker == game.Players.LocalPlayer.Name then
+            return
+        end
         local messageSplit = string.split(messageData.Message, ' ')
         for i, v in pairs(messageSplit) do
             if table.find(getgenv().keyWords, v:lower()) then
