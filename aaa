@@ -104,7 +104,7 @@ local function serverHop()
         while true do
             local cS, sL = pcall(httpService.JSONDecode, httpService, game:HttpGet('https://games.roblox.com/v1/games/'..game.PlaceId..'/servers/Public?sortOrder=Desc&excludeFullGames=true&limit=100'))
             if cS then
-                for i, v in pairs(serverList['data']) do
+                for i, v in pairs(sL['data']) do
                     game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v['id'])
                     wait(5)
                 end
