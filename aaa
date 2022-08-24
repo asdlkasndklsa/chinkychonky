@@ -1,9 +1,8 @@
 -- Please put numbers as minutes ex. 5 is equal to 5 minutes
 getgenv().webHook = true
 getgenv().webHookLink = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_'
-getgenv().backFlipOnDono = false
 getgenv().noDonoTime = 20
-getgenv().boothText = '<font color="#03fc62">DOING GIVEAWAY\nWINNER WILL BE CHOSEN WHEN ONLINE\n\nMORE ENTRIES = HIGHER CHANCE\n1 R$ = 1 ENTRY</font>'
+getgenv().boothText = '<font color="#03fc62">1 R$ = 5 BACKFLIPS</font>'
 getgenv().autoMessage = false
 getgenv().messageText = "donate if you're cool"
 getgenv().autoMessageCD = 3
@@ -216,12 +215,11 @@ getRemotes.OnClientEvent("ChatDonationAlert"):Connect(function(p21, p22, p23, p2
                 sendWebHook(p21, tostring(backFlipAmount / 5))
             end)
         end
-        if getgenv().backFlipOnDono then
-            for i = 1, backFlipAmount do
-                print(i.. '/'.. backFlipAmount)
-                localPlayerBackflip(oldCFrame)
-                task.wait(.55)
-            end
+        
+        for i = 1, backFlipAmount do
+            print(i.. '/'.. backFlipAmount)
+            localPlayerBackflip(oldCFrame)
+            task.wait(.55)
         end
         localPlayer.Character.HumanoidRootPart.CFrame = oldCFrame
     end
