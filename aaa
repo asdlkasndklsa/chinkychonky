@@ -3,7 +3,7 @@ getgenv().webHook = true
 getgenv().webHookLink = 'https://discord.com/api/webhooks/1010800658082955314/heF-7laZu4htztzQdDZzzJvnNQkrWBzJMTnOvv8mjm0vJUYjRPSqTeX0jHewvXnKOMc_'
 getgenv().backFlipOnDono = false
 getgenv().noDonoTime = 20
-getgenv().boothText = '<font color="#03fc62">DOING GIVEAWAY\nWINNER WILL BE CHOSEN WHEN ONLINE\n\n1 R$ = 1 ENTRY</font>'
+getgenv().boothText = '<font color="#03fc62">DOING GIVEAWAY\nWINNER WILL BE CHOSEN WHEN ONLINE\n\nMORE ENTRIES = HIGHER CHANCE\n1 R$ = 1 ENTRY</font>'
 getgenv().autoMessage = false
 getgenv().messageText = "donate if you're cool"
 getgenv().autoMessageCD = 3
